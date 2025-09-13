@@ -46,7 +46,7 @@ body {
     margin-left: 20px;
 }
 
-/* ===== HERO SECTION ===== */
+
 .hero {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -102,7 +102,7 @@ body {
     cursor: pointer;
 }
 
-/* Right cards */
+
 .hero-right {
     display: flex;
     flex-direction: column;
@@ -195,7 +195,8 @@ section {
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(4,1fr);
+    grid-auto-rows: minmax(280px,auto);
     gap: 20px;
 }
 
@@ -203,26 +204,81 @@ section {
     background: #f9f9f9;
     border-radius: 20px;
     padding: 15px;
-    text-align: center;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
 }
 
 .product-card img {
     width: 100%;
     border-radius: 15px;
     margin-bottom: 10px;
+    object-fit: cover;
+    flex-grow: 1;
+    min-height: 0;
 }
+.product-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+.product-card p {
+    font-size: 14px;
+    color: #555;
+    margin-top: 4px;
+}
+/* 3. Place each card explicitly on the grid to match the image */
+.product-grid .product-card:nth-child(1) {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.product-grid .product-card:nth-child(2) {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}
+
+/* Make the 3rd card span 2 columns */
+.product-grid .product-card:nth-child(3) {
+    grid-column: 3 / 5;
+    grid-row: 1 / 2;
+}
+
+/* Make the 4th card span 2 columns */
+.product-grid .product-card:nth-child(4) {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+}
+
+/* Make the 5th card span 2 rows */
+.product-grid .product-card:nth-child(5) {
+    grid-column: 3 / 4;
+    grid-row: 2 / 4;
+}
+
+.product-grid .product-card:nth-child(6) {
+    grid-column: 4 / 5;
+    grid-row: 2 / 3;
+}
+
 .color-buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 30px;
+    cursor: pointer;
 }
 
 .color {
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 20px;
     padding: 6px 14px;
     font-size: 14px;
+    transition: width 2s;
+    color: white;
+}
+.color:hover
+{
+    width: 200px;
 }
 
 .testimonial {
@@ -330,6 +386,7 @@ section {
     padding: 40px 80px;
     background-color: #111;
     border-top: 1px solid #222;
+    margin-top: 40px;
 }
 .footer-left {
     max-width: 300px;
@@ -409,4 +466,107 @@ section {
 
 .footer-column ul li a:hover {
     color: #fff;
+}
+
+
+
+/* ================================================= */
+/* ============== RESPONSIVE STYLES ============== */
+/* ================================================= */
+
+@media (max-width: 768px) {
+    /* --- General Adjustments --- */
+    section {
+        margin-top: 40px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    /* --- Navigation --- */
+    .navi .searchbox,
+    .navi .menu {
+        display: none; /* Hide search and menu on mobile */
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+        grid-template-columns: 1fr; /* Stack hero sections vertically */
+    }
+
+    .hero-left .image_container1 {
+        height: 500px; /* Reduce height for mobile */
+    }
+    
+    .text-overlay1 {
+        font-size: 48px; /* Reduce font size */
+        top: 30px;
+        left: 20px;
+    }
+
+    .text-overlay2 {
+        font-size: 16px;
+        top: 220px; /* Reposition text */
+        left: 20px;
+    }
+
+    .card {
+        height: 250px; /* Reduce height of smaller cards */
+    }
+
+    /* --- Trending Section --- */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* Change to a 2-column grid */
+    }
+
+    /* Reset all explicit grid placements for a simple flow */
+    .product-grid .product-card {
+        grid-column: unset !important;
+        grid-row: unset !important;
+    }
+
+    /* --- Testimonial Section --- */
+    .testimonial {
+        padding: 40px 20px; /* Reduce padding */
+        text-align: center;
+        height: auto;
+    }
+    .testimonial-text {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    /* --- Features Section --- */
+    .feature-grid {
+        flex-direction: column; /* Stack features vertically */
+        gap: 40px;
+    }
+
+    /* --- Blog Section --- */
+    .blog-container {
+        flex-direction: column; /* Stack blog image and text */
+        text-align: center;
+    }
+    .blog-container img {
+        width: 100%;
+    }
+
+    /* --- Footer Section --- */
+    .footer {
+        flex-direction: column; /* Stack footer sections */
+        gap: 40px;
+        padding: 40px 20px;
+        text-align: center;
+    }
+    .footer-right {
+        flex-direction: column; /* Stack footer columns */
+        gap: 30px;
+        width: 100%;
+        align-items: center;
+    }
+
+    .footer-column {
+        text-align: center;
+    }
 }
